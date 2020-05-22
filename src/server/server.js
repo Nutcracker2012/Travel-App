@@ -1,6 +1,8 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = [];
 
+
+
 // Require Express to run server and routes
 var path = require('path')
 const express = require('express');
@@ -15,6 +17,22 @@ app.use(bodyParser.json());
 // Cors for cross origin allowance
 const cors = require('cors');
 app.use(cors());
+
+
+// // API
+// const dotenv = require('dotenv');
+// dotenv.config();
+
+// / set aylien API credentials
+// // NOTICE that textapi is the name I used, but it is arbitrary.
+// // You could call it aylienapi, nlp, or anything else, 
+// //   just make sure to make that change universally!
+// var textapi = new aylien({
+// application_id: process.env.API_ID,
+// application_key: process.env.API_KEY
+// });
+
+
 
 // Initialize the main project folder
 app.use(express.static('dist'));
@@ -43,12 +61,12 @@ app.get('/all', function(req, res) {
 //collect and store user data so that the app can access it later is through making an HTTP POST request
 //POST data to the app end point projectData{}
 //crate an API named add
-app.post('/add', function(req, res) {
+app.post('/forWeatherAPI', function(req, res) {
 
     let newEntry = {
-        temp: req.body.temp,
-        date: req.body.date,
-        content: req.body.content
+        lat: req.body.lat,
+        lng: req.body.lng,
+        DepartDate: req.body.DepartDate
     };
     projectData.push(newEntry);
     res.send(projectData);
@@ -56,3 +74,26 @@ app.post('/add', function(req, res) {
 
 
 });
+
+app.get('/', function(req, res) {
+    res.sendFile('dist/index.html')
+})
+
+// Post Route
+app.post('/add', addInfo);
+
+function addInfo(req, res) {
+    console.log('fdsafda')
+    projectData['city_name'] = req.body.city_name;
+    projectData['state_code'] = req.body.state_code;
+    projectData['min_temp'] = req.body.min_temp;
+    projectData['sunrise'] = req.body.sunrise;
+    projectData['sunset'] = req.body.sunset;
+    projectData['description'] = req.body.description;
+    projectData['countryName'] = req.body.countryName;
+    projectData['dayLeft'] = req.body.dayLeft;
+    projectData['imageURL'] = req.body.imageURL;
+    console.log('fdsafda22', projectData['imageURL'], projectData['dayLeft'], projectData['city_name'])
+    res.send(projectData);
+
+}

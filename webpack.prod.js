@@ -23,15 +23,19 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
-            {
-                test: /\.html$/,
-                use: [{ loader: "html-loader" }],
-            },
+
             {
                 //remember that sass can't have quotes!
                 test: /\.scss$/,
                 //style-loader is loaded as inline styles, which is slow. Replace it with MiniCssExtractPlugin loader.
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/i,
+                use: [{
+                    loader: 'file-loader',
+                }, ]
+
             }
         ]
     },
