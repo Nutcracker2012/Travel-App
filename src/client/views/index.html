@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Travelpal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Handlee&display=swap" rel="stylesheet">
 </head>
@@ -11,27 +12,30 @@
 <body>
     <div id="app">
         <div class="holderHeadline">
-            Travelpal | plan your trip
+            Travelpal Planner
         </div>
         <!-- <form action="index.html" method="GET"> -->
-        <div class="holder zip">
-            <label for="UserCity">Enter Your Destination here</label>
-            <input type="text" id="UserCity" placeholder="enter your city here">
-        </div>
-        <div class="startDate">
-            <label for="DepartDate">When would you like to leave?</label>
-            <input type="date" id="DepartDate" placeholder="Enter your Startdate here">
-        </div>
-        <div class="endDate">
-            <label for="EndDate">When would you like to come back?</label>
-            <input type="date" id="EndDate" placeholder="Enter your Enddate here">
-        </div>
-        <div>
-            <button id="generate" type="submit"> Submit </button>
+        <div class="formContainer">
+            <div class="Cityinput">
+                <label for=" UserCity ">Enter Your Destination here</label>
+                <input type="text" id="UserCity" placeholder="enter your city here" required>
+            </div>
+            <div class="startDate">
+                <label for="DepartDate ">When would you like to leave?</label>
+                <input type="date" id="DepartDate" placeholder="enter your Startdate here" required>
+            </div>
+            <div class="endDate">
+                <label for="EndDate ">When would you like to come back?</label>
+                <input type="date" id="EndDate" placeholder="enter your Enddate here" required>
+            </div>
+            <div class="button">
+                <button id="generate" type="submit"> Submit </button>
+                <!-- <button id="reset" type="reset"> Reset </button> -->
+            </div>
         </div>
         <!-- </form> -->
 
-        <div class="holder entry">
+        <div class="tripSummary">
             <div class="title">Your Trip Summary</div>
             <div id="entryHolder">
                 <div class="distImg">

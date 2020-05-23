@@ -1,111 +1,151 @@
+$button-hover-color: #8c61ff;
+$button-hover-font-color: white;
+$title-font-color: white;
 body {
-    background: #fffff8;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas: "Leftpad Content Rightpad";
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    background: linear-gradient(#553772, #f5487f);
+    background: linear-gradient( #553772, #f5487f);
+    width: 100%;
+    height: 100vh;
 }
 
 #app {
+    // border: solid;
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height: 100vh;
-    color: #072448;
-    justify-content: left;
-    margin-left: 10rem;
-    grid-gap: 1rem;
+    grid-area: Content;
+    margin: 0.5rem 1rem 1rem 1rem;
+    // grid-auto-rows: minmax(150px, auto);
+    grid-template-rows: 5rem 25rem auto;
+    grid-template-areas: "title" "form" "summary";
+    height: 98vh;
+    color: #f9b4ab;
+    font-weight: 300;
+    justify-content: center;
+    // margin-left: 10rem;
+    grid-row-gap: 1rem;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
 
 .holderHeadline {
-    padding-top: 3rem;
-    font-size: 46px;
+    display: grid;
+    grid-area: title;
+    padding-top: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: $title-font-color;
     // background: #54d2d2;
 }
 
 .holder {}
 
-.holderFeel {
+.formContainer {
+    // border: solid;
     display: grid;
-    grid-template-rows: 1fr 7fr 3fr;
-    grid-template-areas: "title" "text" "btn";
+    grid-area: form;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "city" "startdate" "enddate" "button";
+    height: 100%;
 }
 
-.holderFeel label {
+textarea {}
+
+.Cityinput {
     display: grid;
-    grid-area: title;
+    grid-area: city;
 }
 
-textarea {
+.startDate {
     display: grid;
-    grid-area: text;
+    grid-area: startdate;
+}
+
+.endDate {
+    display: grid;
+    grid-area: enddate;
+}
+
+.button {
+    display: grid;
+    grid-area: button;
+    width: 15rem;
+    height: 2.5rem;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "btn1 btn2";
+    grid-column-gap: 1rem;
 }
 
 button {
+    // width: 10rem;
+    // height: 5rem;
+    background: #3b4a6b;
+    color: #f0d43a;
+    font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
+    border: none;
+    box-shadow: 2px 4px 5px #444;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background-color: $button-hover-color;
+    color: $button-hover-font-color;
+    border-radius: 0.25rem;
+    line-height: 1.25rem;
+}
+
+input:hover {
+    background-color: $button-hover-color;
+    color: $button-hover-font-color;
+    line-height: 1.25rem;
+}
+
+#generate {
     display: grid;
-    grid-area: btn;
+    grid-area: btn1;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
 }
 
-.entry {
-    background: #bae8e8;
+#reset {
+    display: grid;
+    grid-area: btn2;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
 }
 
-#entryHolder {
-    background: #bae8e8;
-    padding-bottom: 3rem;
-    margin-bottom: 6rem;
-}
-
-#date {}
-
-#temp {}
-
-#content {}
-
-.headline {}
-
-.title {}
-
+// button[type=submit]:hover {
+//     background-color: $button-hover-color;
+//     border-radius: 3px;
+//     line-height: 1.25rem;
+// }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 
 label {
     display: block;
-    font-size: 27px;
+    font-size: 1.25rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    // color: white;
 }
 
 input {
     display: block;
-    height: 60px;
-    width: 320px;
-    background: #22b2da;
-    color: #f0d43a;
+    height: 4rem;
+    width: 20rem;
+    background: #fdebd3;
+    color: #264e70;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
-}
-
-button {
-    width: 400px;
-    height: 100px;
-    background: #3b4a6b;
-    color: #f0d43a;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
-}
-
-h1 {
-    font-size: 36px;
-}
-
-textarea {
-    background: #22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    margin-bottom: 1rem;
+    padding: 0rem 0.5rem;
 }
 
 
@@ -118,23 +158,293 @@ button:focus {
     outline: none;
 }
 
+// style for card
+.tripSummary {
+    display: grid;
+    grid-area: summary;
+    grid-template-rows: 2ch auto minmax(5rem, 50rem);
+    grid-template-areas: "summarytitle" "placeholder";
+    grid-row-gap: 0.5rem;
+    padding-bottom: 5rem;
+}
+
+.title {
+    display: grid;
+    grid-area: summarytitle;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1ac0c6;
+    // padding-bottom: 0.5rem;
+    ;
+}
+
+#entryHolder {
+    display: grid;
+    background: #bae8e8;
+    border-radius: 0.25rem;
+    grid-area: placeholder;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "img" "text";
+    height: auto;
+    // padding-bottom: 3rem;
+    // margin-bottom: 6rem;
+}
+
+.distImg {
+    display: grid;
+    grid-area: img;
+    justify-content: center;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    // max-height: 100%;
+}
+
+.TripText {
+    padding: 1rem 0.5rem;
+    display: grid;
+    grid-area: text;
+    line-height: 1rem;
+}
+
+#UserCityName {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-bottom: 0.25rem;
+}
+
+#UserDepartDate {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+#UserBackDate {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+#dayLeft {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+#temp {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+#summary {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+// .holderFeel label {
+//     display: grid;
+//     // grid-area: title;
+// }
 
 /* Style for Placeholder Text*/
 
 ::placeholder {
     /* Firefox, Chrome, Opera */
-    color: #f0d43a;
+    color: #264e70;
     font-family: 'Oswald', sans-serif;
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #f0d43a;
+    color: #264e70;
     font-family: 'Oswald', sans-serif;
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #f0d43a;
+    color: #264e70;
     font-family: 'Oswald', sans-serif;
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 1024px) {
+    body {
+        display: grid;
+        grid-template-columns: 5% 90% 5%;
+        grid-template-areas: "Leftpad Content Rightpad";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        background: linear-gradient( #553772, #f5487f);
+        width: 100%;
+        height: 100vh;
+    }
+    #app {
+        // border: solid;
+        display: inline-block;
+        width: 100%;
+        grid-area: Content;
+        margin: 0.25rem 0.5rem 0.5rem 0.5rem;
+        // grid-auto-rows: minmax(150px, auto);
+        grid-template-rows: 3rem 15rem auto;
+        grid-template-areas: "title" "form" "summary";
+        height: 98vh;
+        color: #f9b4ab;
+        font-weight: 300;
+        justify-content: center;
+        // margin-left: 10rem;
+        grid-row-gap: 0.5rem;
+        font-size: 1.5rem;
+        font-family: 'Oswald', sans-serif;
+    }
+    .holderHeadline {
+        display: grid;
+        grid-area: title;
+        text-align: left;
+        padding: 1rem 0rem;
+        font-size: 2rem;
+        font-weight: 600;
+        color: $title-font-color;
+        // background: #54d2d2;
+    }
+    label {
+        display: block;
+        // height: 1.5rem;
+        font-size: 1.25rem;
+        margin-bottom: 0 rem;
+        // color: white;
+    }
+    input {
+        display: block;
+        height: 4rem;
+        width: 20rem;
+        background: #fdebd3;
+        color: #264e70;
+        font-size: 20px;
+        font-family: 'Oswald', sans-serif;
+        border: none;
+        // margin-bottom: 1rem;
+        padding: 0rem 0.5rem;
+    }
+    .formContainer {
+        // border: solid;
+        display: grid;
+        grid-area: form;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-areas: "city" "startdate" "enddate" "button";
+        height: 25rem;
+    }
+    .Cityinput {
+        display: grid;
+        grid-area: city;
+        // margin-bottom: 0.25rem;
+    }
+    .startDate {
+        display: grid;
+        grid-area: startdate;
+    }
+    .endDate {
+        display: grid;
+        grid-area: enddate;
+    }
+    .button {
+        display: grid;
+        grid-area: button;
+        width: 15rem;
+        height: 2.5rem;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "btn1 btn2";
+        grid-column-gap: 1rem;
+    }
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 568px) {
+    body {
+        display: grid;
+        grid-template-columns: 1% 80% 1%;
+        grid-template-areas: "Leftpad Content Rightpad";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        background: linear-gradient( #553772, #f5487f);
+        width: 100%;
+        height: 100vh;
+    }
+    #app {
+        // border: solid;
+        display: inline-block;
+        width: 100%;
+        grid-area: Content;
+        margin: 0.25rem 0.5rem 0.5rem 0.5rem;
+        // grid-auto-rows: minmax(150px, auto);
+        grid-template-rows: 3rem 10rem auto;
+        grid-template-areas: "title" "form" "summary";
+        height: 98vh;
+        color: #f9b4ab;
+        font-weight: 300;
+        justify-content: center;
+        // margin-left: 10rem;
+        grid-row-gap: 0.5rem;
+        font-size: 1.5rem;
+        font-family: 'Oswald', sans-serif;
+    }
+    .holderHeadline {
+        display: grid;
+        grid-area: title;
+        text-align: left;
+        padding: 1rem 0rem;
+        font-size: 2rem;
+        font-weight: 600;
+        color: $title-font-color;
+        // background: #54d2d2;
+    }
+    label {
+        display: block;
+        // height: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 0 rem;
+        // color: white;
+    }
+    input {
+        display: block;
+        height: 3rem;
+        width: 18rem;
+        background: #fdebd3;
+        color: #264e70;
+        font-size: 20px;
+        font-family: 'Oswald', sans-serif;
+        border: none;
+        // margin-bottom: 1rem;
+        padding: 0rem 0.5rem;
+    }
+    .formContainer {
+        // border: solid;
+        display: grid;
+        grid-area: form;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-areas: "city" "startdate" "enddate" "button";
+        height: 22rem;
+    }
+    .Cityinput {
+        display: grid;
+        grid-area: city;
+        // margin-bottom: 0.25rem;
+    }
+    .startDate {
+        display: grid;
+        grid-area: startdate;
+    }
+    .endDate {
+        display: grid;
+        grid-area: enddate;
+    }
+    .button {
+        display: grid;
+        grid-area: button;
+        width: 15rem;
+        height: 2.5rem;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "btn1 btn2";
+        grid-column-gap: 1rem;
+    }
 }

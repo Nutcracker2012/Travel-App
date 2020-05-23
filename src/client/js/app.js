@@ -149,15 +149,12 @@ const getWeatherForcastData = async() => {
 
     let departDate_past = new Date(userDepartDate)
     departDate_past.setFullYear(departDate_past.getFullYear() - 1);
-    console.log('fdsfdsafdska', departDate_past)
+    console.log('history data get', departDate_past)
 
     var DepartHisFormat = departDate_past.toISOString().substring(0, 10);
 
 
-    console.log('fdsfdsafdska', DepartHisFormat)
-
-
-
+    console.log('Dapartdate calculated', DepartHisFormat)
 
 
     console.log(DepartHisFormat);
