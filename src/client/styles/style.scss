@@ -2,7 +2,7 @@ body {
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
-    background: linear-gradient(#ffcb00, #f8aa4b);
+    background: linear-gradient(#553772, #f5487f);
 }
 
 #app {
@@ -51,7 +51,11 @@ button {
     background: #bae8e8;
 }
 
-#entryHolder {}
+#entryHolder {
+    background: #bae8e8;
+    padding-bottom: 3rem;
+    margin-bottom: 6rem;
+}
 
 #date {}
 
