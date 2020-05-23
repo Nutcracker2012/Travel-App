@@ -2,6 +2,7 @@ body {
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
+    background: linear-gradient(#ffcb00, #f8aa4b);
 }
 
 #app {
@@ -9,16 +10,18 @@ body {
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height: 100vh;
-    background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
-    color: #f0d43a;
-    justify-content: center;
+    color: #072448;
+    justify-content: left;
+    margin-left: 10rem;
     grid-gap: 1rem;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
 
 .holderHeadline {
+    padding-top: 3rem;
     font-size: 46px;
+    // background: #54d2d2;
 }
 
 .holder {}

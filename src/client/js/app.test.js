@@ -1,4 +1,4 @@
-import { getGeoData } from './app';
+import getGeoData from './app';
 
 describe("getGeoData", () => {
     let placename = "london";

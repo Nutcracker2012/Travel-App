@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = [];
+projectData = {};
 
 
 
@@ -65,13 +65,12 @@ app.post('/forWeatherAPI', function(req, res) {
 
     let newEntry = {
         lat: req.body.lat,
-        lng: req.body.lng,
+        lon: req.body.lon,
         DepartDate: req.body.DepartDate
     };
     projectData.push(newEntry);
     res.send(projectData);
     console.log(projectData);
-
 
 });
 
@@ -80,20 +79,52 @@ app.get('/', function(req, res) {
 })
 
 // Post Route
-app.post('/add', addInfo);
+app.post('/add', function(req, res) {
 
-function addInfo(req, res) {
     console.log('fdsafda')
-    projectData['city_name'] = req.body.city_name;
-    projectData['state_code'] = req.body.state_code;
-    projectData['min_temp'] = req.body.min_temp;
-    projectData['sunrise'] = req.body.sunrise;
-    projectData['sunset'] = req.body.sunset;
-    projectData['description'] = req.body.description;
-    projectData['countryName'] = req.body.countryName;
-    projectData['dayLeft'] = req.body.dayLeft;
-    projectData['imageURL'] = req.body.imageURL;
-    console.log('fdsafda22', projectData['imageURL'], projectData['dayLeft'], projectData['city_name'])
+    projectData.lat = req.body.lat;
+    projectData.lon = req.body.lon;
+    projectData.countryName = req.body.countryName;
+    // projectData['sunrise'] = req.body.sunrise;
+    // projectData['sunset'] = req.body.sunset;
+    // projectData['description'] = req.body.description;
+    // projectData['countryName'] = req.body.countryName;
+    // projectData['dayLeft'] = req.body.dayLeft;
+    // projectData['imageURL'] = req.body.imageURL;
+    // console.log('fdsafda22', projectData['imageURL'], projectData['dayLeft'], projectData['city_name'])
     res.send(projectData);
 
-}
+})
+
+
+app.post('/addweather', function(req, res) {
+
+    console.log('fdsafda')
+    projectData.city_name = req.body.city_name;
+    projectData.state_code = req.body.state_code;
+    projectData.min_temp = req.body.min_temp;
+    projectData.max_temp = req.body.max_temp;
+    projectData.userDepartDate = req.body.userDepartDate;
+    projectData.dayLeft = req.body.dayLeft;
+    projectData.description = req.body.description;
+
+    // weatherForcastData.sunset = sunset;
+    // "data not available beyond 16 days" = description;
+    res.send(projectData);
+
+})
+
+
+
+
+app.post('/addphoto', function(req, res) {
+
+    console.log('fdsafdaaddphoto')
+    projectData.imageURL = req.body.imageURL;
+
+    // weatherForcastData.sunrise = sunrise;
+    // weatherForcastData.sunset = sunset;
+    // "data not available beyond 16 days" = description;
+    res.send(projectData);
+
+})

@@ -30,30 +30,27 @@ function performAction(e) {
         // New Syntax!
         .then(LocationData => {
             // Add data
+            console.log('run random function');
             const saveDataForWeather = {}
                 // saveDataForWeather.DepartDate = userDepartDate;
             console.log(LocationData);
-            const lat = LocationData.geoname[0].lat;
-            const lng = LocationData.geoname[0].lng;
-            const countryName = LocationData.geoname[0].countryName;
+            const lat = LocationData.geonames[0].lat;
+            const lon = LocationData.geonames[0].lng;
+            const countryName = LocationData.geonames[0].countryName;
             saveDataForWeather.lat = lat;
-            saveDataForWeather.lng = lng;
+            saveDataForWeather.lon = lon;
             saveDataForWeather.countryName = countryName;
-            console.log('lat is ', lat, 'lng is ', lng, countryName);
-            //Add data to POST request
-            //passing in the URL of the POST route, and an object containing the data to be posted.
-
-            console.log(saveDataForWeather)
-
-            postData('http://localhost:3000/add', saveDataForWeather)
-        }).then(
-            getWeatherForcastData()
+            console.log('lat is ', lat, 'lon is ', lon, countryName);
+            postData('/add', saveDataForWeather)
+        })
+        .then(
+            getWeatherForcastData
         )
         .then(
-            getpixbay()
+            getpixbay
         )
         .then(
-            updateUI()
+            updateUI
         )
 }
 
@@ -62,8 +59,13 @@ function performAction(e) {
 
 // Make a GET request to get GeoData
 const getGeoData = async() => {
-    //Call the API 
-    //The API Key variable is passed as a parameter to 
+    console.log('Run getGeoData')
+        //Call the API 
+        //Call the API 
+        //Call the API 
+        //The API Key variable is passed as a parameter to 
+        //The API Key variable is passed as a parameter to 
+        //The API Key variable is passed as a parameter to 
     const placename = document.getElementById("UserCity").value;
     const api = `${geoNamesURL}${placename}&maxRows=10&username=${geoUsername}`;
     console.log(api)
@@ -76,7 +78,6 @@ const getGeoData = async() => {
         // 1. we can do something with our returned data here, such as that we could chain events so that we can do something else with that data
         // 2
         // postData()
-        console.log('get GeoData success');
         return geoData;
 
     } catch (error) {
@@ -92,7 +93,7 @@ const getGeoData = async() => {
 // Async POST 
 // Post Route: take two arguments, the URL to make a POST to, and an object holding the data to POST.
 const postData = async(url = '', data = {}) => {
-
+    console.log('Run postData')
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -104,14 +105,15 @@ const postData = async(url = '', data = {}) => {
         body: JSON.stringify(data), // body data type must match "Content-Type" header        
     });
 
-    console.log(url, 'post half check')
+    console.log(url, data, 'postData check point 1')
+    console.log(response)
 
     try {
         const UIData = await response.json();
         console.log("add success");
         return UIData
     } catch (error) {
-        console.log("error2", error);
+        console.log("error2-----", error);
     }
 }
 
@@ -119,7 +121,8 @@ const postData = async(url = '', data = {}) => {
 // Make a GET request to get WeatherForcastData
 const getWeatherForcastData = async() => {
     //fetch to get ln & lat
-    const res = await fetch('/add');
+    console.log('Run getWeatherForcastData')
+    const res = await fetch('/all');
     const weatherdata = await res.json();
     const lon = weatherdata.lon;
     const lat = weatherdata.lat;
@@ -127,11 +130,33 @@ const getWeatherForcastData = async() => {
     //Call the API 
     //The API Key variable is passed as a parameter to 
     const userDepartDate = document.getElementById("DepartDate").value;
+    console.log(userDepartDate, ' fdsaffd')
+    const tempDate = new Date(userDepartDate)
     const timestampDepart = (new Date(userDepartDate).getTime()) / 1000;
     const dayLeft = Math.round((timestampDepart - timestampNow) / (60 * 60 * 24));
-    //Transform depart date in YYYY-MM-DD
-    let DepartHisFormat = userDepartDate.getFullYear() + '-' + userDepartDate.getMonth() + 1 + '-' + userDepartDate.getDate();
-    let DepartHisFormatTom = userDepartDate.getFullYear() - 1 + '-' + userDepartDate.getMonth() + 1 + '-' + userDepartDate.getDate();
+    console.log('day left ---- ', dayLeft)
+        //Transform depart date in YYYY-MM-DD
+        // let DepartHisFormat = tempDate.getFullYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDate();
+        // let DepartHisFormatTom = tempDate.getFullYear() - 1 + '-' + tempDate.getMonth() + '-' + tempDate.getDate();
+
+
+    // let DepartHisFormat = "2019-05-27"
+    // let DepartHisFormatTom = "2019-05-27"
+
+    let departDate_past = new Date(userDepartDate)
+    departDate_past.setFullYear(departDate_past.getFullYear() - 1)
+    console.log('fdsfdsafdska', departDate_past)
+
+    var DepartHisFormat = departDate_past.toISOString().substring(0, 10);
+
+
+    console.log('fdsfdsafdska', DepartHisFormat)
+
+
+
+
+
+    console.log(DepartHisFormat)
     const weatherbitURL = "https://api.weatherbit.io/v2.0/forecast/daily?";
     const weatherbitAPIkey = "10a49528e4074f59b926a3d566b9caeb";
     //Day left < 16, get weather from forcast
@@ -139,71 +164,68 @@ const getWeatherForcastData = async() => {
     const weatherbitApiFuthure = `${weatherbitURL}lat=${lat}&lon=${lon}&days=${dayLeft}&key=${weatherbitAPIkey}`;
     // Day left >16, get weather data from history data
     //https://api.weatherbit.io/v2.0/history/daily?lat=35.775&lon=-78.638&start_date=2020-05-17&end_date=2020-05-18&tz=local&key=10a49528e4074f59b926a3d566b9caeb
-    const weatherbitApiHis = `${weatherbitURL}lat=${lat}&lon=${lon}&key=${weatherbitAPIkey}&start_date=${DepartHisFormat}&end_date=${DepartHisFormatTom}`;
+    const weatherbitApiHis = `${weatherbitURL}lat=${lat}&lon=${lon}&key=${weatherbitAPIkey}&start_date=${DepartHisFormat}&end_date=${DepartHisFormat}`;
 
     if (dayLeft < 16) {
         const res = await fetch(weatherbitApiFuthure)
             // if everything goes well and we get our data back, it will conduct try 
-        try {
-            // Get new data that is in JSON format using .json method
-            const weatherForcastData = await res.json();
-            // console the data 
-            // 1. we can do something with our returned data here, such as that we could chain events so that we can do something else with that data
-            // 2
-            const weatherForcastSave = {
-                city_name: weatherForcastData.city_name,
-                state_code: weatherForcastData.state_code,
-                min_temp: weatherForcastData.min_temp,
-                max_temp: weatherForcastData.max_temp,
-                sunrise: weatherForcastData.sunrise,
-                sunset: weatherForcastData.sunset,
-                description: weatherForcastData.weather.description,
-                dayLeft: dayLeft
-                lat: weatherdata.lat
-                lon: weatherdata.lon
+            // try {
+        const weatherForcastData = await res.json();
+        console.log(weatherForcastData)
+        const weatherForcastSave = {}
+        weatherForcastSave.city_name = weatherForcastData.city_name;
+        weatherForcastSave.state_code = weatherForcastData.state_code;
+        weatherForcastSave.min_temp = weatherForcastData.data[0].min_temp;
+        weatherForcastSave.max_temp = weatherForcastData.data[0].max_temp;
+        weatherForcastSave.lon = weatherForcastData.lon;
+        weatherForcastSave.lat = weatherForcastData.lat;
+        weatherForcastSave.userDepartDate = userDepartDate;
+        weatherForcastSave.dayLeft = dayLeft;
+        weatherForcastSave.description = weatherForcastData.data[0].weather.description;
 
-            };
-
-            postData('/add', weatherForcastSave) // TODO jumps to postData maybe wrong
-            return weatherForcastSave;
-        } catch (error) {
-            // appropriately handle the error
-            console.log("error3", error);
-
-        }
+        console.log('weatherForcastData before postData --------------------')
+        postData('/addweather', weatherForcastSave) // jumps to postData
+        return weatherForcastSave;
 
     } else {
         const res = await fetch(weatherbitApiHis)
             // if everything goes well and we get our data back, it will conduct try 
-        try {
+            // try {
             // Get new data that is in JSON format using .json method
-            const weatherForcastData = await res.json();
-            // console the data 
-            // 1. we can do something with our returned data here, such as that we could chain events so that we can do something else with that data
-            // 2
-            const weatherForcastSave = {
+        console.log(res)
+        const weatherForcastData = await res.json();
+        // console the data 
+        // 1. we can do something with our returned data here, such as that we could chain events so that we can do something else with that data
+        // 2
+        console.log(weatherForcastData)
+        const weatherForcastSave = {
 
-            }
-            weatherForcastData.city_name = city_name;
-            weatherForcastData.state_code = state_code;
-            weatherForcastData.min_temp = min_temp;
-            weatherForcastData.max_tem = max_temp;
-            weatherForcastData.sunrise = sunrise;
-            weatherForcastData.sunset = sunset;
-            "data not available beyond 16 days" = description;
-            weatherdata.lon = lon;
-            weatherdata.lat = lon;
-
-
-            postData('/add', weatherForcastData) // jumps to postData
-            return weatherForcastSave;
-        } catch (error) {
-            // appropriately handle the error
-            console.log("error4", error);
         }
+        weatherForcastSave.city_name = weatherForcastData.city_name;
+        weatherForcastSave.state_code = weatherForcastData.state_code;
+        weatherForcastSave.min_temp = weatherForcastData.data[0].min_temp;
+        weatherForcastSave.max_temp = weatherForcastData.data[0].max_temp;
+        weatherForcastSave.lon = weatherForcastData.lon;
+        weatherForcastSave.lat = weatherForcastData.lat;
+        weatherForcastSave.userDepartDate = userDepartDate;
+        weatherForcastSave.dayLeft = dayLeft;
+        weatherForcastSave.description = 'not available';
+
+
+        console.log('weatherForcastData before postData --------------------')
+        postData('/addweather', weatherForcastSave) // jumps to postData
+        return weatherForcastSave;
+        // } catch (error) {
+        //     // appropriately handle the error
+        //     console.log("error4", error);
+        // }
 
     }
 }
+
+
+
+
 
 
 
@@ -211,6 +233,7 @@ const getWeatherForcastData = async() => {
 const getpixbay = async() => {
     //Call the API 
     //The API Key variable is passed as a parameter to 
+    console.log('Run getpixbay')
     const placename = document.getElementById("UserCity").value;
     const pixabayAPI = `${pixabayAPIURL}${pixabayAPIkey}&q=${placename}&image_type=photo`;
     console.log(pixabayAPI)
@@ -229,7 +252,7 @@ const getpixbay = async() => {
 
         console.log('get image success');
 
-        postData('/add', (ImageURLSave)) // jumps to postData
+        postData('/addphoto', (ImageURLSave)) // jumps to postData
     } catch (error) {
         // appropriately handle the error
         console.log("error5", error);
@@ -250,8 +273,11 @@ const getpixbay = async() => {
 
 // update weather related UI
 const updateUI = async() => {
-    const request = await fetch('/');
+    console.log('Run updateUI')
+    const request = await fetch('/all');
+    console.log('fetch from /all')
     const UIData = await request.json();
+    console.log('This is the result from fetch from /all %%%%%%%%%%%')
     console.log(UIData)
     const imageURL = UIData.imageURL;
     const city_name = UIData.city_name;
@@ -264,15 +290,17 @@ const updateUI = async() => {
     const countryName = UIData.contryName;
     const dayLeft = UIData.dayLeft;
 
-    try {
-
-        document.getElementById("distinationImg").innerHTML = '<img src=' + UIData.imageURL + '>'
-        document.getElementById("UserCity").innerHTML = UIData.city_name + ',' + UIData.state_code + ',' + UIData.countryName;
-        document.getElementById('DepartDate').innerHTML = 'Departing: ' + UIData.DepartDate;
-        document.getElementById('dayLeft').innerHTML = UIData.dayLeft + 'days away';
-        document.getElementById('temp').innerHTML = UIData.min_temp + 'To' + UIData.max_temp;
-
-    } catch (error) {
-        console.log("error3", error);
-    }
+    console.log('Run updateUI try')
+    console.log('city_name', UIData.city_name)
+        // try {
+    document.getElementById("distinationImg").innerHTML = '<img src=' + UIData.imageURL + '>';
+    document.getElementById("UserCityName").innerHTML = UIData.city_name;
+    document.getElementById('UserDepartDate').innerHTML = 'Departing:  ' + UIData.userDepartDate;
+    document.getElementById('dayLeft').innerHTML = UIData.dayLeft + ' days away';
+    document.getElementById('temp').innerHTML = UIData.min_temp + ' To ' + UIData.max_temp;
+    document.getElementById('summary').innerHTML = UIData.description;
+    // ,' + UIData.state_code + ',' + UIData.countryName;
+    // } catch (error) {
+    //     console.log("error3", error);
+    // }
 }
