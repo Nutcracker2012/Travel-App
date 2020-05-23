@@ -1,7 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
-
-
+var projectData = {};
 
 // Require Express to run server and routes
 var path = require('path')
@@ -130,3 +128,10 @@ app.post('/addphoto', function(req, res) {
     res.send(projectData);
 
 })
+
+//for testing
+const sum = (a, b) => {
+    return a + b;
+}
+
+module.exports = sum;

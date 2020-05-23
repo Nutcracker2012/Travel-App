@@ -21,7 +21,14 @@ const pixabayAPIkey = "16612659-a3ef7a4e4200e1d68ec5b75fb";
 
 
 //chain the events
-document.getElementById('generate').addEventListener('click', performAction);
+// document.getElementById('generate').addEventListener('click', performAction);
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Not part of module.exports but still appearing in terminal, why?');
+    var button = document.getElementById('generate');
+    button.addEventListener('click', performAction);
+});
+
 
 // Chain events
 function performAction(e) {
@@ -300,7 +307,8 @@ const updateUI = async() => {
     console.log('city_name', UIData.city_name)
         // try {
     document.getElementById("distinationImg").innerHTML = '<img src=' + UIData.imageURL + '>';
-    document.getElementById("UserCityName").innerHTML = UIData.city_name + ', ' + UIData.state_code + ', ' + UIData.countryName;
+    // document.getElementById("UserCityName").innerHTML = UIData.city_name + ', ' + UIData.state_code + ', ' + UIData.countryName;
+    document.getElementById("UserCityName").innerHTML = UIData.city_name + ', ' + UIData.countryName;
     document.getElementById('UserDepartDate').innerHTML = 'Start Date:  ' + UIData.userDepartDate;
     document.getElementById('UserBackDate').innerHTML = 'End Date:  ' + UIData.userBackDate;
     document.getElementById('dayLeft').innerHTML = ' Total trip is ' + UIData.daylength + ' days, it is ' + UIData.dayLeft + ' days away';
