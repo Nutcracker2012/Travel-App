@@ -20,8 +20,8 @@ app.use(cors());
 
 
 // // API
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 // / set aylien API credentials
 // // NOTICE that textapi is the name I used, but it is arbitrary.
@@ -105,9 +105,7 @@ app.post('/addweather', function(req, res) {
     projectData.min_temp = req.body.min_temp;
     projectData.max_temp = req.body.max_temp;
     projectData.userDepartDate = req.body.userDepartDate;
-    projectData.userBackDate = req.body.userBackDate;
     projectData.dayLeft = req.body.dayLeft;
-    projectData.daylength = req.body.daylength;
     projectData.description = req.body.description;
 
     // weatherForcastData.sunset = sunset;

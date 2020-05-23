@@ -13,16 +13,24 @@
         <div class="holderHeadline">
             Travelpal | plan your trip
         </div>
+        <!-- <form action="index.html" method="GET"> -->
         <div class="holder zip">
             <label for="UserCity">Enter Your Destination here</label>
             <input type="text" id="UserCity" placeholder="enter your city here">
         </div>
-        <div class="holderFeel">
+        <div class="startDate">
             <label for="DepartDate">When would you like to leave?</label>
-            <input type="date" id="DepartDate" placeholder="Enter your date here">
-            <!-- <textarea class="myInput" id="feelings" placeholder="Enter your date here" rows="9" cols="50"></textarea> -->
+            <input type="date" id="DepartDate" placeholder="Enter your Startdate here">
+        </div>
+        <div class="endDate">
+            <label for="EndDate">When would you like to come back?</label>
+            <input type="date" id="EndDate" placeholder="Enter your Enddate here">
+        </div>
+        <div>
             <button id="generate" type="submit"> Submit </button>
         </div>
+        <!-- </form> -->
+
         <div class="holder entry">
             <div class="title">Your Trip Summary</div>
             <div id="entryHolder">
@@ -32,6 +40,7 @@
                 <div class="TripText">
                     <div id="UserCityName"></div>
                     <div id="UserDepartDate"></div>
+                    <div id="UserBackDate"></div>
                     <div id="dayLeft"></div>
                     <div id="temp"></div>
                     <div id="summary"></div>
@@ -41,7 +50,7 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         // Check that service workers are supported
         if ('serviceWorker' in navigator) {
             // Use the window load event to keep the page load performant
@@ -49,7 +58,7 @@
                 navigator.serviceWorker.register('/service-worker.js');
             });
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
