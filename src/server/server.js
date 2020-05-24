@@ -129,9 +129,6 @@ app.post('/addphoto', function(req, res) {
 
 })
 
-//for testing
-const sum = (a, b) => {
-    return a + b;
-}
 
-module.exports = sum;
+//export
+module.exports = app;
