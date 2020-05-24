@@ -25,10 +25,16 @@ const pixabayAPIkey = "16612659-a3ef7a4e4200e1d68ec5b75fb";
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Not part of module.exports but still appearing in terminal, why?');
-    var button = document.getElementById('generate');
-    button.addEventListener('click', performAction);
+    var submit = document.getElementById('generate');
+    submit.addEventListener('click', performAction);
 });
 
+// // reset function to clear input
+// let btnReset = document.getElementById('reset');
+// let inputs = document.querySelectorAll('input');
+// btnReset.onclick = function() {
+//     inputs.forEach(input => input.value = '');
+// };
 
 // Chain events
 function performAction(e) {
