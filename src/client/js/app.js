@@ -20,14 +20,22 @@ const pixabayAPIkey = "16612659-a3ef7a4e4200e1d68ec5b75fb";
 // const projectData = {}
 
 
-//chain the events
+// //chain the events
 // document.getElementById('generate').addEventListener('click', performAction);
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Not part of module.exports but still appearing in terminal, why?');
     var submit = document.getElementById('generate');
     submit.addEventListener('click', performAction);
 });
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     console.log('Not part of module.exports but still appearing in terminal, why?');
+//     var submit = document.getElementById('generate');
+//     var btnReset = document.getElementById('resetData');
+//     submit.addEventListener('click', performAction);
+//     btnReset.addEventListener('click', Reset);
+// });
 
 // // reset function to clear input
 // let btnReset = document.getElementById('reset');
@@ -35,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // btnReset.onclick = function() {
 //     inputs.forEach(input => input.value = '');
 // };
+
+function Reset() {
+    let inputs = document.querySelectorAll('input');
+    inputs.forEach(input => input.value = '');
+}
+
 
 // Chain events
 function performAction(e) {
