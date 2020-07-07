@@ -40,6 +40,37 @@ Once duplicated, change the new project’s name to make certain you're not over
  ## Extend the Project Further - Roadmap/Strategy
 - Add end date and display length of trip.
 
+## Run this application
+- Pre-requisite : Install node.js
+
+- unzip the projects folder.
+
+- install the dependencies
+
+```
+npm install
+
+```
+- Run build for the project using the cmd as follow:
+```
+npm run build-prod
+
+```
+- Run the server.
+```
+npm start
+```
+- View the URL http://localhost:3000/ in browser
+
+- View the URL http://localhost:8080/ in browser.
+```
+npm run build-dev  
+```
+- Run the testing 
+
+```
+npm run test.
+```
 
 
 
