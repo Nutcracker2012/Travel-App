@@ -73,7 +73,7 @@ npm run test.
 ```
 ## Project Screenshots
 ### App Home page
-![App screenshot](src/client/img/App sceenshot.png)
+![App screenshot](src/client/img/App_sceenshot.png)
 
 
 
